@@ -3,31 +3,38 @@
 # TODO User input validation for number
 # user input on the type of conversion
 # menu system 1-inches to mm 2-mm to inches
-userConversionInput = input('What type of conversion? \n\t 1- inches to mm \n\t 2- mm to inches: \n')
- 
-userInput = input('What is the number: ')
-print('Your number is:', userInput) # TODO remove for prod
-userNumber = float(userInput) 
 
-def calculate(userNumber, conversionType):
-    if conversionType == '1':
-        userAnswer = userNumber * 25.4
-    if conversionType == '2':
-        userAnswer = userNumber / 25.4
-    return userAnswer
+def inToMM(userNumber):
+    return userNumber * 25.4
 
-def printResults(userConversionInput, userInput, calcValue):
+def MMToIn(userNumber):
+    return userNumber / 25.4
+
+def InToFt(userNumber):
+    return userNumber / 12
+
+def printResults(userConversionInput, userNumber):
     if userConversionInput == '1':
         # set first value to in and second value to mm
         conversionUnit = 'in'
         convertedUnit = 'mm'
+        calcValue = inToMM(userNumber)
     if userConversionInput == '2':
         # set first value to mm and second value to in
         conversionUnit = 'mm'
         convertedUnit = 'in'
-    print('The answer is:', userInput, conversionUnit, '=', calcValue, convertedUnit)
+        calcValue = MMToIn(userNumber)
+    if userConversionInput == '3':
+            conversionUnit = 'in'
+            convertedUnit = 'ft'
+            calcValue = InToFt(userNumber)
+    print('Conversion -->', userNumber, conversionUnit, '=', calcValue, convertedUnit)
 
-calcValue = calculate(userNumber, userConversionInput)
-printResults(userConversionInput, userInput, calcValue)
+while True:   
+    userConversionInput = input('What type of conversion? \n\t 1- inches to mm \n\t 2- mm to inches: \n\t 3- inches to feet: \n\t Q- to Quit: \n')
+    if userConversionInput == 'Q':
+        break
+    userInput = input('What is the number: ')
+    userNumber = float(userInput)
+    printResults(userConversionInput, userNumber)
 
-# Print ex: The answer is 1 in = 25.4mm or 2 in = to 50.8mm
